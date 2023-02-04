@@ -4,4 +4,4 @@ This repository is an analysis that explores the short-term rental registrations
 
 ## File Structure
 
-The folder 'proj1' contains 3 files: 'inputs', 'outputs', and 'scripts'. The 'inputs' folder contains any raw and cleaned data that will be referenced in the analysis. The 'outputs' folder contains my list of references along with the paper.
+The folder 'proj1' contains 3 files: 'inputs', 'outputs', and 'scripts'. The 'inputs' folder contains any raw and cleaned data that will be referenced in the analysis. The 'outputs' folder contains my list of references along with the paper. The 'scripts' folder contains how I imported the data (00-dowload_data), cleaned the data (00-aquire), and simulated the data (00-simulation).
