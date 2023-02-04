@@ -1,0 +1,47 @@
+---
+title: "Homeless Shelter Occupancy"
+author: "Tayedza Allison Chikumbirike"
+date: "February 3, 2023"
+format: pdf
+subtitle: "insert subtitle"
+abstract: "insert abstract"
+thanks: "Code and data are available at: https:// finish"
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#### WORKSPACE SETUP ####
+library(opendatatoronto)
+library(dplyr)
+library(tidyverse)
+library(janitor)
+
+#### IMPORTING DATASET ####
+
+# get package
+package <- show_package("8a6eceb2-821b-4961-a29d-758f3087732d")
+package
+
+# get all resources for this package
+resources <- list_package_resources("8a6eceb2-821b-4961-a29d-758f3087732d")
+
+# identify datastore resources; by default, Toronto Open Data sets datastore resource format to CSV for non-geospatial and GeoJSON for geospatial resources
+datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'))
+
+# load the first datastore resource as a sample
+data <- filter(datastore_resources, row_number()==1) %>% get_resource()
+
+#### CLEANING DATASET ####
+# women's dataset
+clean_data_women <- clean_names(data) |>
+  select(shelter_city, shelter_name, sector, occupancy, capacity) |>
+  filter(shelter_city == "Toronto", sector == "Women") |>
+  group_by(shelter_name)
+
+# men's dataset
+clean_data_men <- clean_names(data) |>
+  select(shelter_city, shelter_name, sector, occupancy, capacity) |>
+  filter(shelter_city == "Toronto", sector == "Men")
+
